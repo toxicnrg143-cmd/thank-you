@@ -1,0 +1,159 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19720\viewh10480\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+  <meta charset="UTF-8" />\
+  <title>Thank You</title>\
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\
+\
+  <style>\
+    * \{\
+      margin: 0;\
+      padding: 0;\
+      box-sizing: border-box;\
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;\
+    \}\
+\
+    body \{\
+      background: #f6f5f2;\
+      color: #222;\
+      height: 100vh;\
+      display: flex;\
+      align-items: center;\
+      justify-content: center;\
+      text-align: center;\
+      transition: background 2s ease;\
+    \}\
+\
+    body.fade-out \{\
+      background: #ffffff;\
+    \}\
+\
+    .container \{\
+      max-width: 560px;\
+      padding: 30px;\
+    \}\
+\
+    .text \{\
+      font-size: 1.4rem;\
+      line-height: 1.7;\
+      opacity: 0;\
+      transition: opacity 1s ease;\
+    \}\
+\
+    .text.show \{\
+      opacity: 1;\
+    \}\
+\
+    .small \{\
+      font-size: 0.9rem;\
+      color: #666;\
+      margin-top: 20px;\
+    \}\
+\
+    button \{\
+      margin-top: 40px;\
+      background: none;\
+      border: none;\
+      font-size: 0.9rem;\
+      color: #555;\
+      cursor: pointer;\
+      letter-spacing: 1px;\
+    \}\
+\
+    button:hover \{\
+      color: #000;\
+    \}\
+  </style>\
+</head>\
+<body>\
+\
+  <div class="container">\
+    <div id="text" class="text"></div>\
+    <div id="small" class="small"></div>\
+    <button id="nextBtn">continue</button>\
+  </div>\
+\
+  <script>\
+    const messages = [\
+      \{ main: "This isn\'92t a question." \},\
+      \{ main: "It\'92s a thank you." \},\
+      \{ main: "Not for one thing." \},\
+      \{ main: "For everything that added up." \},\
+\
+      \{ main: "You showed up." \},\
+      \{ main: "Every single day." \},\
+\
+      \{ main: "Even on the days when we didn\'92t listen." \},\
+      \{ main: "Even when my sister and I were difficult." \},\
+      \{ main: "Even when it probably wasn\'92t easy." \},\
+\
+      \{ main: "You still came the next day." \},\
+      \{ main: "That consistency mattered." \},\
+      \{ main: "More than we ever said out loud." \},\
+\
+      \{ main: "Even on your low days." \},\
+      \{ main: "You were still there for us." \},\
+      \{ main: "Still checking in." \},\
+      \{ main: "Still showing up." \},\
+      \{ main: "Still caring." \},\
+\
+      \{ main: "Around 700 days.", sub: "And not once did you stop." \},\
+\
+      \{ main: "Somewhere along the way, that changed things." \},\
+      \{ main: "It made us feel safe." \},\
+      \{ main: "It made us feel supported." \},\
+      \{ main: "It made this house feel lighter." \},\
+\
+      \{ main: "I hope you know that." \},\
+\
+      \{ main: "Happy Birthday." \},\
+      \{ main: "Thank you for being there." \},\
+      \{ main: "Always." \},\
+\
+      \{ \
+        main: "\'97 with gratitude",\
+        sub: "from Ayush \'b7 " + new Date().toLocaleDateString()\
+      \}\
+    ];\
+\
+    let index = 0;\
+    const textEl = document.getElementById("text");\
+    const smallEl = document.getElementById("small");\
+    const btn = document.getElementById("nextBtn");\
+\
+    function showText() \{\
+      textEl.classList.remove("show");\
+      smallEl.textContent = "";\
+\
+      setTimeout(() => \{\
+        textEl.textContent = messages[index].main;\
+        if (messages[index].sub) \{\
+          smallEl.textContent = messages[index].sub;\
+        \}\
+        textEl.classList.add("show");\
+      \}, 200);\
+    \}\
+\
+    btn.addEventListener("click", () => \{\
+      index++;\
+      if (index < messages.length) \{\
+        showText();\
+      \} else \{\
+        btn.style.display = "none";\
+        document.body.classList.add("fade-out");\
+      \}\
+    \});\
+\
+    showText();\
+  </script>\
+\
+</body>\
+</html>\
+}
