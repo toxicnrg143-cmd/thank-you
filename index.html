@@ -64,9 +64,29 @@
     button:hover {
       color: #000;
     }
+
+    /* 🔇 Mute button */
+    .mute-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.05);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .mute-btn:hover {
+      background: rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
+
+  <button class="mute-btn" id="muteBtn">🔊 sound on</button>
 
   <div class="container">
     <div id="text" class="text"></div>
@@ -74,7 +94,7 @@
     <button id="nextBtn">continue</button>
   </div>
 
-  <!-- Soft piano music -->
+  <!-- 🎹 Piano music -->
   <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_9e3c9b6e5f.mp3" type="audio/mpeg">
   </audio>
@@ -127,7 +147,10 @@
     const smallEl = document.getElementById("small");
     const btn = document.getElementById("nextBtn");
     const music = document.getElementById("bgMusic");
+    const muteBtn = document.getElementById("muteBtn");
+
     let musicStarted = false;
+    let isMuted = false;
 
     function showText() {
       textEl.classList.remove("show");
@@ -145,7 +168,7 @@
     btn.addEventListener("click", () => {
       if (!musicStarted) {
         music.volume = 0.35;
-        music.play();
+        music.play().catch(() => {});
         musicStarted = true;
       }
 
@@ -158,9 +181,14 @@
       }
     });
 
+    muteBtn.addEventListener("click", () => {
+      isMuted = !isMuted;
+      music.muted = isMuted;
+      muteBtn.textContent = isMuted ? "🔇 muted" : "🔊 sound on";
+    });
+
     showText();
   </script>
 
 </body>
 </html>
-
