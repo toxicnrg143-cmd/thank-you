@@ -65,7 +65,13 @@
       color: #000;
     }
 
-    /* 🔇 Mute button */
+    .play-btn {
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      color: #444;
+      cursor: pointer;
+    }
+
     .mute-btn {
       position: fixed;
       top: 20px;
@@ -76,11 +82,6 @@
       border-radius: 20px;
       font-size: 0.8rem;
       cursor: pointer;
-      color: #333;
-    }
-
-    .mute-btn:hover {
-      background: rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -89,12 +90,12 @@
   <button class="mute-btn" id="muteBtn">🔊 sound on</button>
 
   <div class="container">
+    <div class="play-btn" id="playMusic">▶ play music</div>
     <div id="text" class="text"></div>
     <div id="small" class="small"></div>
     <button id="nextBtn">continue</button>
   </div>
 
-  <!-- 🎹 Piano music -->
   <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_9e3c9b6e5f.mp3" type="audio/mpeg">
   </audio>
@@ -105,41 +106,18 @@
       { main: "It’s a thank you." },
       { main: "Not for one thing." },
       { main: "For everything that added up." },
-
       { main: "You showed up." },
       { main: "Every single day." },
-
       { main: "Even on the days when we didn’t listen." },
       { main: "Even when my sister and I were difficult." },
-      { main: "Even when it probably wasn’t easy." },
-
       { main: "You still came the next day." },
-      { main: "That consistency mattered." },
-      { main: "More than we ever said out loud." },
-
       { main: "Even on your low days." },
-      { main: "You were still there for us." },
-      { main: "Still checking in." },
-      { main: "Still showing up." },
-      { main: "Still caring." },
-
+      { main: "You were there for us." },
       { main: "Around 700 days.", sub: "And not once did you stop." },
-
-      { main: "Somewhere along the way, that changed things." },
-      { main: "It made us feel safe." },
-      { main: "It made us feel supported." },
-      { main: "It made this house feel lighter." },
-
-      { main: "I hope you know that." },
-
       { main: "Happy Birthday." },
       { main: "Thank you for being there." },
       { main: "Always." },
-
-      { 
-        main: "— with gratitude",
-        sub: "from Ayush · " + new Date().toLocaleDateString()
-      }
+      { main: "— with gratitude", sub: "from Ayush · " + new Date().toLocaleDateString() }
     ];
 
     let index = 0;
@@ -147,31 +125,28 @@
     const smallEl = document.getElementById("small");
     const btn = document.getElementById("nextBtn");
     const music = document.getElementById("bgMusic");
+    const playBtn = document.getElementById("playMusic");
     const muteBtn = document.getElementById("muteBtn");
 
-    let musicStarted = false;
     let isMuted = false;
 
     function showText() {
       textEl.classList.remove("show");
       smallEl.textContent = "";
-
       setTimeout(() => {
         textEl.textContent = messages[index].main;
-        if (messages[index].sub) {
-          smallEl.textContent = messages[index].sub;
-        }
+        if (messages[index].sub) smallEl.textContent = messages[index].sub;
         textEl.classList.add("show");
       }, 200);
     }
 
-    btn.addEventListener("click", () => {
-      if (!musicStarted) {
-        music.volume = 0.35;
-        music.play().catch(() => {});
-        musicStarted = true;
-      }
+    playBtn.addEventListener("click", () => {
+      music.volume = 0.35;
+      music.play();
+      playBtn.style.display = "none";
+    });
 
+    btn.addEventListener("click", () => {
       index++;
       if (index < messages.length) {
         showText();
@@ -192,3 +167,4 @@
 
 </body>
 </html>
+
