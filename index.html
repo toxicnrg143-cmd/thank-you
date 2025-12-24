@@ -14,8 +14,8 @@
     }
 
     body {
-      background: #f6f5f2;
-      color: #222;
+      background: linear-gradient(180deg, #faf7f2, #f1ece4);
+      color: #2a2a2a;
       height: 100vh;
       display: flex;
       align-items: center;
@@ -38,6 +38,7 @@
       line-height: 1.7;
       opacity: 0;
       transition: opacity 1s ease;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
     .text.show {
@@ -72,6 +73,11 @@
     <div id="small" class="small"></div>
     <button id="nextBtn">continue</button>
   </div>
+
+  <!-- Soft piano music -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_9e3c9b6e5f.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const messages = [
@@ -120,6 +126,8 @@
     const textEl = document.getElementById("text");
     const smallEl = document.getElementById("small");
     const btn = document.getElementById("nextBtn");
+    const music = document.getElementById("bgMusic");
+    let musicStarted = false;
 
     function showText() {
       textEl.classList.remove("show");
@@ -135,6 +143,12 @@
     }
 
     btn.addEventListener("click", () => {
+      if (!musicStarted) {
+        music.volume = 0.35;
+        music.play();
+        musicStarted = true;
+      }
+
       index++;
       if (index < messages.length) {
         showText();
@@ -149,3 +163,4 @@
 
 </body>
 </html>
+
